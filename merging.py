@@ -31,7 +31,7 @@ corrMatrix = round(df.corr(),2)
 #plt.show() # no significant ( > 0.8) correlations yay!
 
 # label dependent/independent variables
-# acuity considered the classifier, 1=most severe, 2:5=not as severe
+# acuity considered the classifier, 1:2=need medical attention, 3:5=not as severe
 dv = df.acuity # dependent variable
 ivs = df.loc[:, df.columns != 'acuity'] # all other columns as independent variables
 
