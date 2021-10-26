@@ -18,32 +18,27 @@ is_NaN = df.isnull()
 row_has_NaN = is_NaN.any(axis=1)
 rows_with_NaN = df[row_has_NaN]
 
-#print("Rows in total:", df.shape)
-#print("Rows with missing values:", rows_with_NaN.shape)
+print("Rows in total:", df.shape)
+print("Rows with missing values:", rows_with_NaN.shape)
 
 # Drop rows with missing values (is this a good idea?..)
 df = df.dropna(axis=0)
-#print("Remaining rows without missing values:", df.shape)
+print("Remaining rows without missing values:", df.shape)
 
 # Correlation Matrix
 corrMatrix = round(df.corr(),2)
-#sn.heatmap(corrMatrix, annot=True)
-#plt.show() # no significant ( > 0.8) correlations yay!
+sn.heatmap(corrMatrix, annot=True)
+plt.show() # no significant ( > 0.8) correlations yay!
 
 # label dependent/independent variables
 # acuity considered the classifier, 1:2=need medical attention, 3:5=not as severe
 dv = df.acuity # dependent variable
 ivs = df.loc[:, df.columns != 'acuity'] # all other columns as independent variables
 
-# histograms of all numerical variables
-# df['temperature'].hist(bins=15, figsize=(15,6))
-
 sn.scatterplot(x=df['temperature'], y=dv)
 plt.show()
 
-
-
-
+# split data, 30% training data
 
 
 
