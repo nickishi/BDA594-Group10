@@ -43,7 +43,15 @@ severe_Ratio = severe/total_count
 not_severe_Ratio = not_severe/total_count
 print("Ratio of severe:", severe_Ratio)
 print("Ratio of not severe:", not_severe_Ratio)
+
+
 ## the data is imbalanced...
+
+# try LDA and confusion matrix to assess sensitivity/true positive rate
+
+# change threshold of LDA to account for imbalance in data; 50% -> 35%
+
+
 
 
 
