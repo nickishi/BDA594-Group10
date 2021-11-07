@@ -1,8 +1,10 @@
 import pandas as pd
 import seaborn as sn
+import csv
 import matplotlib.pyplot as plt
 import numpy as np
 import sklearn
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
 df = pd.read_csv(r'/Users/marrionmac/PycharmProjects/bda_594/triage.csv')
 df2 = pd.read_csv(r'/Users/marrionmac/PycharmProjects/bda_594/diagnosis.csv')
@@ -29,7 +31,7 @@ print("Remaining rows without missing values:", df.shape)
 # Correlation Matrix
 corrMatrix = round(df.corr(),2)
 sn.heatmap(corrMatrix, annot=True)
-plt.show() # no significant ( > 0.8) correlations yay!
+#plt.show() # no significant ( > 0.8) correlations yay!
 
 # recoding dependent variable 'acuity'
 # acuity considered the classifier, 1:2=need medical attention, 3:5=not as severe
@@ -49,8 +51,16 @@ print("Ratio of not severe:", not_severe_Ratio)
 
 # try LDA and confusion matrix to assess sensitivity/true positive rate
 
+#clf = LinearDiscriminantAnalysis()
+#y = df.acuity # dependent variable
+#x = df.loc[:, df.columns != 'acuity']
+#results = clf.fit(x, y)
+# print(results)
+
+
 # change threshold of LDA to account for imbalance in data; 50% -> 35%
 
+df.to_csv(r'/Users/marrionmac/PycharmProjects/cleaned_data.csv')
 
 
 
