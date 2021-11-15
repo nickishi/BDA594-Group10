@@ -6,8 +6,8 @@ import numpy as np
 import sklearn
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
-df = pd.read_csv(r'/Users/marrionmac/PycharmProjects/bda_594/triage.csv')
-df2 = pd.read_csv(r'/Users/marrionmac/PycharmProjects/bda_594/diagnosis.csv')
+df = pd.read_csv(r'triage.csv')
+df2 = pd.read_csv(r'diagnosis.csv')
 
 # inner join tables using subject_id
 merged_inner = df.merge(right=df2, how='inner', on='subject_id')
@@ -60,7 +60,7 @@ print("Ratio of not severe:", not_severe_Ratio)
 
 # change threshold of LDA to account for imbalance in data; 50% -> 35%
 
-df.to_csv(r'/Users/marrionmac/PycharmProjects/cleaned_data.csv')
+df.to_csv(r'cleaned_data.csv')
 
 
 
