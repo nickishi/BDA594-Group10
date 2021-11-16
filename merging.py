@@ -45,6 +45,9 @@ severe_Ratio = severe/total_count
 not_severe_Ratio = not_severe/total_count
 print("Ratio of severe:", severe_Ratio)
 print("Ratio of not severe:", not_severe_Ratio)
+print("Total count:", total_count)
+print("Total rows:", df.shape)
+
 
 
 ## the data is imbalanced...
