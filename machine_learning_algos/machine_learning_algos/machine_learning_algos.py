@@ -3,7 +3,20 @@ import sklearn.tree
 import sklearn.model_selection
 import sklearn.neighbors
 import sklearn.neural_network
+import random
 
+
+def join_lists(list1, list2):
+
+    random.seed(0)
+
+    returned_list = list1 + list2
+    
+    random.shuffle(returned_list)
+
+    return returned_list
+
+    
 def main():
 
     with open("D:\AI Lab\DHS_Hololens\BDA594-Group10\cleaned_data.csv", "r") as cleaned_data_file:
