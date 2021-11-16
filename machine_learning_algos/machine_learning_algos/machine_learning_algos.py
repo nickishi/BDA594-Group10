@@ -16,7 +16,51 @@ def join_lists(list1, list2):
 
     return returned_list
 
-    
+
+def clean_data(unclean_list):
+
+    for element in unclean_list:
+        pop_row = False
+        for item in element:
+
+
+            #Remove any rows with temperature outside normal range
+            if float(item[1]) >= 75 and float(item[1]) <= 108:
+                pass
+            else:
+                pop_row = True
+                break
+
+            #Remove any rows with resprate outside normal range
+            if float(item[3]) < 100 and float(item[3]) > 10:
+                pass
+            else:
+                pop_row = True
+                break
+
+            #Remove any o2 state below 60
+            if float(item[4]) > 60:
+                pass
+            else:
+                pop_row = True
+                break
+
+            #Remove any pain that is not within normal range (0-10)
+            if float(item[7]) <= 10 and float(item[7]) >= 0:
+                pass
+            else:
+                pop_row = True
+                break
+
+        if pop_row == True:
+            unclean_list.remove(element)
+        pop_row = False
+
+
+
+
+
+
 def main():
 
     with open("D:\AI Lab\DHS_Hololens\BDA594-Group10\cleaned_data.csv", "r") as cleaned_data_file:
