@@ -7,18 +7,24 @@ import random
 
 
 def join_lists(list1, list2):
-
+    """Joins lists, randomizes the observations, and pulls out the dependent variable into a list"""
     random.seed(0)
-
+    #Generates combined list but randomized
     returned_list = list1 + list2
     
     random.shuffle(returned_list)
 
-    return returned_list
+    y_data = []
+    for i in range(0, len(returned_list)):
+
+        y_data.append(returned_list[i][8])
+
+
+    return returned_list, y_data
 
 
 def clean_data(unclean_list):
-
+    """This function is used to clear any data points that are abnormal, out of range, or blank"""
     for element in unclean_list:
         pop_row = False
         for item in element:
@@ -56,6 +62,9 @@ def clean_data(unclean_list):
             unclean_list.remove(element)
         pop_row = False
 
+        cleaned_list = unclean_list
+
+    return cleaned_list
 
 
 
@@ -111,8 +120,12 @@ def main():
             else:
                 test_data_negative.append(mount_data_negative[i])
 
+        joined_random_data_training, y_train = join_lists(training_data_positive, training_data_negative)
+
+        joined_random_data_test, y_test_train = join_lists(test_data_positive, test_data_negative)
 
 
+        
 
 
 
