@@ -9,6 +9,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 import numpy as np
+import joblib
 
 def join_lists(list1, list2):
     """Joins lists, randomizes the observations, and pulls out the dependent variable into a list"""
@@ -112,14 +113,12 @@ def main():
         y = []
 
         for row in all_cleaned_data:
-            print(row)
             temp_list_x = [row[0],row[1],row[2],row[3],row[4],row[5],row[6]]
 
             x.append(temp_list_x)
             y.append(row[7])
 
         x_train, x_test, y_train, y_test = train_test_split(x,y,test_size = .67)
-        print(x_train)
         #Splitting data
         #training_data_positive = []
         #test_data_positive = []
@@ -156,6 +155,8 @@ def main():
 
         print(confusion_matrix(y_train, predict_train))
         print(classification_report(y_train, predict_train))
+
+        joblib.dump(clf,"bda594_ML_NN.joblib")
     
 
 
