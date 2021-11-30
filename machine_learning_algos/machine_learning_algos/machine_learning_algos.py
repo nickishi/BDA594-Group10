@@ -8,6 +8,7 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
+import numpy as np
 
 def join_lists(list1, list2):
     """Joins lists, randomizes the observations, and pulls out the dependent variable into a list"""
@@ -144,8 +145,9 @@ def main():
 
         clf = sklearn.neural_network.MLPClassifier()
 
-        x_train_standard = StandardScaler(x_train)
-        x_test_standard = StandardScaler(x_test)
+        standard = StandardScaler()
+        x_train_standard = standard.fit_transform(x_train)
+        x_test_standard = standard.fit_transform(x_test)
 
         clf = clf.fit(x_train_standard, y_train)
 
