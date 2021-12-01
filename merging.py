@@ -48,22 +48,23 @@ print("Ratio of not severe:", not_severe_Ratio)
 print("Total count:", total_count)
 print("Total rows:", df.shape)
 
+# count outliers for observations
+# pain_hi_outliers = df[df.pain > 10]
+# pain_lo_outliers = df[df.pan < 0]
+# print(pain_hi_outliers)
+# print(pain_lo_outliers)
+
+# temp_hi_outliers = df[df.temperature > 108]
+# temp_lo_outliers = df[df.temperature < 75]
+# print(len(temp_hi_outliers))
+# print(len(temp_lo_outliers))
+
+# df.to_csv(r'cleaned_data.csv')
 
 
-## the data is imbalanced...
-
-# try LDA and confusion matrix to assess sensitivity/true positive rate
-
-#clf = LinearDiscriminantAnalysis()
-#y = df.acuity # dependent variable
-#x = df.loc[:, df.columns != 'acuity']
-#results = clf.fit(x, y)
-# print(results)
 
 
-# change threshold of LDA to account for imbalance in data; 50% -> 35%
 
-df.to_csv(r'cleaned_data.csv')
 
 
 
