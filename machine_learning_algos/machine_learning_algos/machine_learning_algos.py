@@ -107,6 +107,15 @@ def main():
         cleaned_mount_data_negative = clean_data(mount_data_negative)
 
         all_cleaned_data = cleaned_mount_data_negative + cleaned_mount_data_positive
+        with open("cleaned_data2_python.csv", "w") as file:
+
+            writer = csv.writer(file)
+            writer.writerow(["temperature", "heartrate", "resprate", "o2sat", "sbp", "dbp", "pain", "acuity"])
+            for row in all_cleaned_data:
+
+                writer.writerow(row)
+
+        print("New file with outliers deleted was created")
         #split using sklearn
         
         x = []
