@@ -1,0 +1,47 @@
+setwd("~/Desktop/BDA-594/Project")
+mimicdata <-read.csv('cleaned_data2.csv')
+
+library(rpart) 
+library(tree) 
+library(rpart.plot)
+
+#let's build classification tree
+mimic.ctree <- rpart(acuity ~., data=mimicdata, method="class")
+mimic.ctree
+rpart.plot(mimic.ctree)
+
+#get CP
+opt.cp <- mimic.ctree$cptable[which.min(mimic.ctree$cptable[,"xerror"]),"CP"] #we get 0.016
+
+#lets prune this tree
+printcp(mimic.ctree)
+rpart.plot(prune(mimic.ctree,cp=0.016))
+
+#bagging and random forest
+library(randomForest)
+set.seed(44)
+
+#bagging (boot strapped tree generation using all variables no pruning)
+mimicdata.bag <- randomForest(acuity ~ ., data=mimicdata, mtry=8, ntree=500) #our data has 8 predictors
+
+#Training Error of bagging
+yhat.bag <- predict(mimicdata.bag, mimicdata)
+mean((mimicdata$acuity - yhat.bag-)^2)
+
+#Random Forest set smaller subset of variables for each tree
+#using sqrt(8) rounded down to 2
+set.seed(01)
+mimicdata.rf <- randomForest(acuity ~ ., data=mimicdata, mtry=7)
+
+yhat.rf <- predict(mimicdata.rf, mimicdata)
+mean((yhat.rf-mimicdata$acuity)^2)
+
+#BOOSTING (creating sequential trees based on residuals)
+library(gbm)
+set.seed(01)
+
+#using default parameters of tree depth, tree size, and slowness lambda
+mimic.boost <- gbm(acuity ~ ., data=mimicdata)
+summary(mimic.boost) #see variable importance
+yhat.boost <- predict(mimic.boost, mimicdata, n.trees = 100) #predict using 100 of the trees
+mean((yhat.boost-mimicdata$acuity)^2)
