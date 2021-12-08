@@ -82,9 +82,9 @@ confusionMatrix(test.pred.class, d.test$acuity)
 
 #let draw ROC curve of training and test performance of logit model
 test.log.roc<- roc(response= d.test$acuity, predictor=test.pred.prob[[1]]) #assumes postive class Yes is reference level
-plot(test.log.roc, legacy.axes=T)
+plot(test.log.roc, legacy.axes=T, col="red")
 plot(d.log.roc, add=T, col="blue")
-legend(x=.2, y=.7, legend=c("Test Logit", "Train Logit"), col=c("black", "blue"),lty=1)
+legend(x=.2, y=.7, legend=c("Test Logit", "Train Logit"), col=c("red", "blue"),lty=1)
 
 #test performance slightly lower than resample
 auc(test.log.roc)
