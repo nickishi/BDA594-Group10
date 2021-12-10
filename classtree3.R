@@ -41,7 +41,16 @@ opt.cp <- mimic.ctree$cptable[which.min(mimic.ctree$cptable[,"xerror"]),"CP"] #w
 #prune tree
 rpart.plot(prune(mimic.ctree,cp=0.016))
 
-#make a prediction
+#make a prediction on train set
+predict_train <- predict(mimic.ctree, data_train, type = 'class')
+predict_train
+
+#create confusion matrix to check accuracy
+table_train <- table(data_train$acuity, predict_train)
+table_train
+confusionMatrix(table_train)
+
+#make a prediction on test set
 predict(mimic.ctree, mimicdata, type = 'class')
 predict_unseen <-predict(mimic.ctree, data_test, type = 'class')
 predict_unseen
